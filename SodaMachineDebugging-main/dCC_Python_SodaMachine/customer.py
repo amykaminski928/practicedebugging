@@ -5,8 +5,9 @@ import user_interface
 class Customer:
     def __init__(self):
         self.wallet = Wallet()
+        Wallet.fill_wallet()
         self.backpack = Backpack()
-
+        
     def gather_coins_from_wallet(self, selected_soda):
         """Method allowing user to choose coins from wallet for payment"""
         will_proceed = False
@@ -16,7 +17,7 @@ class Customer:
             user_interface.display_can_cost(selected_soda)
             user_interface.display_payment_value(customer_payment)
             coin_name = user_interface.coin_selection()
-            if coin_name == "done":
+            if coin_name == "Done":
                 break
             payment_coin = self.get_wallet_coin(coin_name)
             if payment_coin is not None:
@@ -35,8 +36,8 @@ class Customer:
 
     def add_coins_to_wallet(self, coins_list):
         """Method responsible for adding coins from a list into wallet's money list"""
-        for coin in coins_list:
-            self.wallet.money.append(coins_list)
+        #for coin in coins_list:
+        self.wallet.money.append(coins_list)
 
     def add_can_to_backpack(self, dispensed_can):
         """Adds instance of a can into backpack's puchased_cans list. No errors"""
@@ -48,7 +49,7 @@ class Customer:
         coins_quantity = [0, 0, 0, 0]
         for coin in self.wallet.money:
             total_value += coin.value
-            if name == "Quarter":
+            if coin.name == "Quarter":
                 coins_quantity[0] += 2
             elif coin.name == "dime":
                 coins_quantity[1] += 1

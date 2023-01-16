@@ -1,11 +1,13 @@
 import cans
-import coins
-import user_interface
+import coins 
+import user_interface 
 class SodaMachine:
     def __init__(self):
         self.register = []
+        self.fill_register()
         self.inventory = []
-
+        self.fill_inventory()
+        
     def fill_register(self):
         """Method will fill SodaMachine's register with certain amounts of each coin when called."""
         for index in range(8):
@@ -29,14 +31,14 @@ class SodaMachine:
     def begin_transaction(self, customer):
         """Method is complete. Initiates purchase if user decides to proceed. No errors."""
         will_proceed = user_interface.display_welcome()
-        if will_proceed:
+        if will_proceed == True:
             self.run_transaction(customer)
 
     def run_transaction(self, customer):
-
+        
         selected_soda_name = user_interface.soda_selection(self.inventory)
 
-        selected_soda = self.get_inventory_soda(selected_soda_name)
+        selected_soda_name = self.get_inventory_soda(selected_soda_name)
 
         customer_payment = customer.gather_coins_from_wallet(selected_soda_name)
 
